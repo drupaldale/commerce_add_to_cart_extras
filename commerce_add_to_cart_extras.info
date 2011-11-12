@@ -1,5 +1,6 @@
 name = Commerce add to cart extras
 description = Provides additional ways of adding products to the cart.
+package = Commerce (contrib)
 core = 7.x
 dependencies[] = views
 dependencies[] = commerce_product

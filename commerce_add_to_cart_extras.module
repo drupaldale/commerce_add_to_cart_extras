@@ -24,6 +24,14 @@ function commerce_add_to_cart_extras_form_alter(&$form, &$form_state, $form_id) 
         $is_quantity_form = TRUE;
       }
     }
+    // Allow form to work when embedded using views_embed_view(), or in a block.
+    if (empty($view->override_path)) {
+      if (!empty($view->preview) || $view->display_handler instanceof views_plugin_display_block) {
+        $view->override_path = $_GET['q'];
+        $query = drupal_get_query_parameters($_GET, array('q'));
+        $form['#action'] = url($view->get_url(), array('query' => $query));
+      }
+    }
   }
 
   if ($is_quantity_form) {
